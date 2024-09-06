@@ -140,7 +140,6 @@ public class GestionNotesApp extends JFrame {
     private JPanel createPanelCalculerMoyennes() {
         JPanel panel = new JPanel(new BorderLayout());
 
-        // Table setup
         String[] columns = {"Matricule", "Nom", "Département", "Niveau", "Moyenne"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
         tableMoyennes = new JTable(model);
