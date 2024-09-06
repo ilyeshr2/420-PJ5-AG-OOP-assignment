@@ -1,6 +1,5 @@
 package tpoop;
 
-// Note.java
 public class Note {
     private double controle;
     private double tp;
