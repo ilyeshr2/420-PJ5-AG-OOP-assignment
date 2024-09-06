@@ -1,6 +1,5 @@
 package tpoop;
 
-// GestionNotesApp.java
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -13,24 +12,18 @@ public class GestionNotesApp extends JFrame {
     private ArrayList<Etudiant> etudiants;
     private ArrayList<Cours> coursList;
 
-    // GUI Components
     private JTabbedPane tabbedPane;
 
-    // Components for "Ajouter Étudiant"
     private JTextField txtNom, txtMatricule, txtDepartement, txtNiveau;
 
-    // Components for "Ajouter Cours"
     private JTextField txtNomCours, txtCoefficient;
 
-    // Components for "Enregistrer Notes"
     private JComboBox<Etudiant> comboEtudiant;
     private JComboBox<Cours> comboCours;
     private JTextField txtControle, txtTP, txtExamen;
 
-    // Components for "Calculer Moyennes"
     private JTable tableMoyennes;
 
-    // Components for "Rechercher"
     private JTextField txtRecherche;
     private JComboBox<String> comboRecherchePar;
     private JTable tableRecherche;
@@ -44,10 +37,8 @@ public class GestionNotesApp extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // Initialize Tabbed Pane
         tabbedPane = new JTabbedPane();
 
-        // Ajouter les onglets
         tabbedPane.addTab("Ajouter Étudiant", createPanelAjouterEtudiant());
         tabbedPane.addTab("Ajouter Cours", createPanelAjouterCours());
         tabbedPane.addTab("Enregistrer Notes", createPanelEnregistrerNotes());
@@ -180,7 +171,6 @@ public class GestionNotesApp extends JFrame {
         topPanel.add(comboRecherchePar);
         topPanel.add(btnRecherche);
 
-        // Table setup
         String[] columns = {"Matricule", "Nom", "Département", "Niveau", "Moyenne"};
         DefaultTableModel model = new DefaultTableModel(columns, 0);
         tableRecherche = new JTable(model);
@@ -212,7 +202,6 @@ public class GestionNotesApp extends JFrame {
             return;
         }
 
-        // Vérifier si le matricule est unique
         for (Etudiant e : etudiants) {
             if (e.getMatricule().equalsIgnoreCase(matricule)) {
                 JOptionPane.showMessageDialog(this, "Un étudiant avec ce matricule existe déjà.", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -225,7 +214,6 @@ public class GestionNotesApp extends JFrame {
         comboEtudiant.addItem(etudiant);
         JOptionPane.showMessageDialog(this, "Étudiant ajouté avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
 
-        // Réinitialiser les champs
         txtNom.setText("");
         txtMatricule.setText("");
         txtDepartement.setText("");
@@ -250,7 +238,6 @@ public class GestionNotesApp extends JFrame {
             return;
         }
 
-        // Vérifier si le cours existe déjà
         Cours nouveauCours = new Cours(nomCours, coefficient);
         if (coursList.contains(nouveauCours)) {
             JOptionPane.showMessageDialog(this, "Ce cours existe déjà.", "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -261,7 +248,6 @@ public class GestionNotesApp extends JFrame {
         comboCours.addItem(nouveauCours);
         JOptionPane.showMessageDialog(this, "Cours ajouté avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
 
-        // Réinitialiser les champs
         txtNomCours.setText("");
         txtCoefficient.setText("");
     }
@@ -293,7 +279,6 @@ public class GestionNotesApp extends JFrame {
             return;
         }
 
-        // Vérifier si une note pour ce cours existe déjà
         if (etudiant.getNotes().containsKey(cours)) {
             int option = JOptionPane.showConfirmDialog(this, "Une note pour ce cours existe déjà. Voulez-vous la mettre à jour ?", "Confirmation", JOptionPane.YES_NO_OPTION);
             if (option != JOptionPane.YES_OPTION) {
@@ -305,7 +290,6 @@ public class GestionNotesApp extends JFrame {
         etudiant.ajouterNote(cours, note);
         JOptionPane.showMessageDialog(this, "Note enregistrée avec succès.", "Succès", JOptionPane.INFORMATION_MESSAGE);
 
-        // Réinitialiser les champs
         txtControle.setText("");
         txtTP.setText("");
         txtExamen.setText("");
@@ -313,7 +297,7 @@ public class GestionNotesApp extends JFrame {
 
     private void afficherMoyennes() {
         DefaultTableModel model = (DefaultTableModel) tableMoyennes.getModel();
-        model.setRowCount(0); // Réinitialiser le tableau
+        model.setRowCount(0); 
 
         for (Etudiant e : etudiants) {
             Object[] row = {
@@ -337,7 +321,7 @@ public class GestionNotesApp extends JFrame {
         }
 
         DefaultTableModel model = (DefaultTableModel) tableRecherche.getModel();
-        model.setRowCount(0); // Réinitialiser le tableau
+        model.setRowCount(0);
 
         for (Etudiant e : etudiants) {
             boolean correspond = false;
